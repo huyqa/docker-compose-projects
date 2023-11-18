@@ -1,0 +1,60 @@
+version: '3.1'
+
+services:
+  nginx:
+    image: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./nginx_logs:/var/log/nginx  # Thêm dòng này để liên kết volume
+
+    networks:
+      - wp-project_default
+    command: /bin/bash -c "apt-get update && apt-get install -y net-tools nano && nginx -g 'daemon off;'"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: P@ssW0rd!@#
+    networks:
+      - wp-project_default
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: wordpressuser
+      WORDPRESS_DB_PASSWORD: P@ssW0rd!@#
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - wp-project_default
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpressuser
+      MYSQL_PASSWORD: P@ssW0rd!@#
+      MYSQL_ROOT_PASSWORD: P@ssW0rd!@#
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - wp-project_default
+
+networks:
+  wp-project_default:
+    external: false
