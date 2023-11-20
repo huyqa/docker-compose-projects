@@ -109,3 +109,12 @@ Kiểm tra xem Nginx có thể đúng cấu hình và chuyển hướng yêu c�
 Để dừng tất cả các container: **docker-compose stop**
 Để khởi động lại các container: **docker-compose start**
 Để loại bỏ các container và mạng: **docker-compose down**
+## Tổng kết
+- Bài viết trên tôi tổng hợp lại những kiến thức thu được khi sử dụng docker compose để setup môi trường PoC.
+- Chắc chắn bài viết còn có nhiều thiếu sót, mong các bạn thông cảm và gửi feedback cho tôi để hoàn thiện thêm.
+- Liên lạc của tôi:
+```
+- Email: huy.quach@huyqa-home.com
+- Website: https://huyqa-home.com
+```
+Xin chân thành cảm ơn!
