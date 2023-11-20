@@ -109,6 +109,41 @@ Kiểm tra xem Nginx có thể đúng cấu hình và chuyển hướng yêu c�
 Để dừng tất cả các container: **docker-compose stop**
 Để khởi động lại các container: **docker-compose start**
 Để loại bỏ các container và mạng: **docker-compose down**
+## Xóa Containers:
+###### Xóa một container đã dừng:
+```
+docker rm <container_id>
+```
+Hoặc để xóa tất cả các containers đã dừng, bạn có thể sử dụng:
+```
+docker container prune
+```
+###### Xóa một container đang chạy:
+Để xóa một container đang chạy, bạn cần dừng nó trước đó bằng lệnh:
+```
+docker stop <container_id>
+```
+Sau đó, xóa container như đã mô tả ở trên.
+###### Xóa tất cả containers (bao gồm cả đang chạy và đã dừng):
+```
+docker rm $(docker ps -aq)
+```
+## Xóa Images:
+###### Xóa một image:
+```
+docker rmi <image_id>
+```
+###### Xóa tất cả images chưa được sử dụng:
+```
+docker image prune
+```
+###### Xóa tất cả images (lưu ý: đây sẽ xóa tất cả images, bao gồm cả những images được sử dụng):
+```
+docker rmi $(docker images -q)
+```
+##Lưu ý quan trọng:
+- Khi bạn xóa một container, dữ liệu bên trong container sẽ bị mất. Đảm bảo bạn đã lưu trữ dữ liệu cần thiết trước khi xóa.
+- Khi bạn xóa một image, tất cả các container được tạo từ image đó sẽ không thể chạy nếu không có image.
 ## Tổng kết
 - Bài viết trên tôi tổng hợp lại những kiến thức thu được khi sử dụng docker compose để setup môi trường PoC.
 - Chắc chắn bài viết còn có nhiều thiếu sót, mong các bạn thông cảm và gửi feedback cho tôi để hoàn thiện thêm.
