@@ -97,15 +97,15 @@ Dưới đây là một ví dụ cơ bản cho tệp cấu hình **default.conf.
     }
 }
 ```
-###Kiểm tra trạng thái các container:
+## Kiểm tra trạng thái các container:
 ```docker-compose ps```
-###Truy cập WordPress:
+## Truy cập WordPress:
 Truy cập WordPress qua địa chỉ **http://localhost:8080** (hoặc thay localhost bằng địa chỉ IP hoặc tên miền của máy chủ nếu bạn đang triển khai trên một máy chủ từ xa).
-###Truy cập PHPMyAdmin:
+## Truy cập PHPMyAdmin:
 Truy cập PHPMyAdmin qua địa chỉ **http://localhost:8081** (hoặc tương tự, thay localhost bằng địa chỉ IP hoặc tên miền của máy chủ).
-###Kiểm tra Nginx Reverse Proxy:
+## Kiểm tra Nginx Reverse Proxy:
 Kiểm tra xem Nginx có thể đúng cấu hình và chuyển hướng yêu cầu đến các dịch vụ khác nhau không. Thử truy cập **http://localhost/phpmyadmin** và **http://localhost:8080** để đảm bảo rằng Nginx đang hoạt động đúng.
-##Quản lý và duy trì:
+## Quản lý và duy trì:
 Để dừng tất cả các container: **docker-compose stop**
 Để khởi động lại các container: **docker-compose start**
 Để loại bỏ các container và mạng: **docker-compose down**
