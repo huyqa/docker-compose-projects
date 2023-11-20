@@ -1,0 +1,53 @@
+# BEGIN WpFastestCache
+# Modified Time: 18-11-23 10:11:06
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^www.192.168.1.4 [NC]
+RewriteRule ^(.*)$ http\:\/\/192\.168\.1\.4\/$1 [R=301,L]
+# Start WPFC Exclude
+# End WPFC Exclude
+# Start_WPFC_Exclude_Admin_Cookie
+RewriteCond %{HTTP:Cookie} !wordpress_logged_in_[^\=]+\=huyqa
+# End_WPFC_Exclude_Admin_Cookie
+RewriteCond %{HTTP_HOST} ^192.168.1.4
+RewriteCond %{HTTP_USER_AGENT} !(facebookexternalhit|WP_FASTEST_CACHE_CSS_VALIDATOR|Twitterbot|LinkedInBot|WhatsApp|Mediatoolkitbot)
+RewriteCond %{HTTP_USER_AGENT} !(WP\sFastest\sCache\sPreload(\siPhone\sMobile)?\s*Bot)
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{HTTPS} !=on
+RewriteCond %{REQUEST_URI} !(\/){2,}
+RewriteCond %{THE_REQUEST} !(\/){2,}
+RewriteCond %{REQUEST_URI} \/$
+RewriteCond %{QUERY_STRING} !.+
+RewriteCond %{HTTP:Cookie} !comment_author_
+RewriteCond %{HTTP:Profile} !^[a-z0-9\"]+ [NC]
+RewriteCond %{DOCUMENT_ROOT}/wp-content/cache/all/$1/index.html -f [or]
+RewriteCond /var/www/html/wp-content/cache/all/$1/index.html -f
+RewriteRule ^(.*) "/wp-content/cache/all/$1/index.html" [L]
+</IfModule>
+<FilesMatch "index\.(html|htm)$">
+AddDefaultCharset UTF-8
+<ifModule mod_headers.c>
+FileETag None
+Header unset ETag
+Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+Header set Pragma "no-cache"
+Header set Expires "Mon, 29 Oct 1923 20:30:00 GMT"
+</ifModule>
+</FilesMatch>
+# END WpFastestCache
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
